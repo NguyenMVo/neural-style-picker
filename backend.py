@@ -9,9 +9,10 @@ import wave
 from glob import glob
 
 IMAGE_FOLDER = "image_folder"
-# model = WhisperModel(model_size, device="cuda", compute_type="float16")
 MODEL_WHISPER = WhisperModel("base.en", device="cpu", compute_type="int8")
-MODEL_QA = pipeline("question-answering", model="phong1123/my_awesome_qa_model")
+MODEL_QA = pipeline(
+    "question-answering", model="phong1123/question_answering_finetune_on_squad2"
+)
 
 
 def speech_to_text(audio_filename):
@@ -70,6 +71,10 @@ def record_audio(filename, session_state, sample_rate=44100, chunk=1024):
 
 
 def get_keyword_from_command(command):
+    if not command:
+        st.error("Cannot process your voice command. Please try again.")
+        return None
+
     question = "What is the style of art that user want?"
 
     response = MODEL_QA(question=question, context=command)
@@ -78,6 +83,10 @@ def get_keyword_from_command(command):
 
 
 def download_images_from_keyword(keyword, limit=10, image_folder=IMAGE_FOLDER):
+    if not keyword:
+        st.error("Cannot process your voice command. Please try again.")
+        return
+
     shutil.rmtree(image_folder, ignore_errors=True)
     google_crawler = GoogleImageCrawler(storage={"root_dir": image_folder})
     google_crawler.crawl(keyword=keyword, max_num=limit)
