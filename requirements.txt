@@ -4,3 +4,8 @@ Pillow==8.4.0
 streamlit==1.5.0
 tensorflow==2.7.0
 tensorflow-hub==0.12.0
+icrawler
+faster-whisper
+pyaudio
+transformers
+torch

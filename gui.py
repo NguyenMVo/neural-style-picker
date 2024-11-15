@@ -90,14 +90,14 @@ if "stage" not in st.session_state:
 
 # Set page configs. Get emoji names from WebFx
 st.set_page_config(
-    page_title="PixelMix - Style Transfer",
+    page_title="Image Style Transfer",
     page_icon="./assets/favicon.png",
     layout="centered",
 )
 
 # -------------Header Section------------------------------------------------
 
-title = '<p style="text-align: center;font-size: 50px;font-weight: 350;font-family:Cursive "> PixelMix </p>'
+title = '<p style="text-align: center;font-size: 50px;font-weight: 350;font-family:Cursive "> Multimedia </p>'
 st.markdown(title, unsafe_allow_html=True)
 
 
